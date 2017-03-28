@@ -1,28 +1,26 @@
 # depslib dependency file v1.0
-1490543611 source:d:\university work\year 3\fyp\dev\raytacer\main.cpp
+1489928056 source:d:\university work\year 3\fyp\dev\raytacer\main.cpp
 	<iostream>
 	"Vector3D.h"
-	"Ray.h"
-	"Camera.h"
 	"Colour.h"
 	"Image.h"
 
-1489760085 d:\university work\year 3\fyp\dev\raytacer\include\vector3d.h
+1489756485 d:\university work\year 3\fyp\dev\raytacer\include\vector3d.h
 	<iostream>
 
-1489759586 source:d:\university work\year 3\fyp\dev\raytacer\src\vector3d.cpp
+1489755986 source:d:\university work\year 3\fyp\dev\raytacer\src\vector3d.cpp
 	"Vector3D.h"
 	<math.h>
 	<iostream>
 	<stdio.h>
 
-1489761048 source:d:\university work\year 3\fyp\dev\raytacer\src\colour.cpp
+1489757448 source:d:\university work\year 3\fyp\dev\raytacer\src\colour.cpp
 	"Colour.h"
 
-1489760255 d:\university work\year 3\fyp\dev\raytacer\include\colour.h
+1489756655 d:\university work\year 3\fyp\dev\raytacer\include\colour.h
 	<iostream>
 
-1490189873 source:d:\university work\year 3\fyp\dev\raytacer\src\image.cpp
+1489928330 source:d:\university work\year 3\fyp\dev\raytacer\src\image.cpp
 	"Image.h"
 	<iostream>
 	<fstream>
@@ -34,44 +32,9 @@
 	<stdlib.h>
 	<stdio.h>
 
-1490189879 d:\university work\year 3\fyp\dev\raytacer\include\image.h
+1489927902 d:\university work\year 3\fyp\dev\raytacer\include\image.h
 	<cmath>
 	<string>
 	<fstream>
 	"Colour.h"
-
-1490203420 source:d:\university work\year 3\fyp\dev\raytacer\src\ray.cpp
-	"Ray.h"
-
-1490531550 d:\university work\year 3\fyp\dev\raytacer\include\ray.h
-	"Vector3D.h"
-
-1490537974 source:d:\university work\year 3\fyp\dev\raytacer\src\camera.cpp
-	"Camera.h"
-
-1490537769 d:\university work\year 3\fyp\dev\raytacer\include\camera.h
-	"Vector3D.h"
-
-1490535215 source:d:\university work\year 3\fyp\dev\raytacer\src\light.cpp
-	"Light.h"
-
-1490534534 d:\university work\year 3\fyp\dev\raytacer\include\light.h
-	"Vector3D.h"
-	"Colour.h"
-
-1490463681 source:d:\university work\year 3\fyp\dev\raytacer\src\scene.cpp
-	"Scene.h"
-
-1490534549 d:\university work\year 3\fyp\dev\raytacer\include\scene.h
-
-1490463752 source:d:\university work\year 3\fyp\dev\raytacer\src\shape.cpp
-	"Shape.h"
-
-1490534553 d:\university work\year 3\fyp\dev\raytacer\include\shape.h
-
-1490463879 source:d:\university work\year 3\fyp\dev\raytacer\src\sphere.cpp
-	"Sphere.h"
-
-1490535052 d:\university work\year 3\fyp\dev\raytacer\include\sphere.h
-	"Shape.h"
 
