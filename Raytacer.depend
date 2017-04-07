@@ -1,26 +1,30 @@
 # depslib dependency file v1.0
-1489928056 source:d:\university work\year 3\fyp\dev\raytacer\main.cpp
+1491307801 source:d:\university work\year 3\fyp\dev\raytacer\main.cpp
 	<iostream>
 	"Vector3D.h"
+	"Ray.h"
+	"Camera.h"
 	"Colour.h"
 	"Image.h"
+	"Sphere.h"
+	"Scene.h"
 
-1489756485 d:\university work\year 3\fyp\dev\raytacer\include\vector3d.h
+1490979213 d:\university work\year 3\fyp\dev\raytacer\include\vector3d.h
 	<iostream>
 
-1489755986 source:d:\university work\year 3\fyp\dev\raytacer\src\vector3d.cpp
+1490979218 source:d:\university work\year 3\fyp\dev\raytacer\src\vector3d.cpp
 	"Vector3D.h"
 	<math.h>
 	<iostream>
 	<stdio.h>
 
-1489757448 source:d:\university work\year 3\fyp\dev\raytacer\src\colour.cpp
+1490683648 source:d:\university work\year 3\fyp\dev\raytacer\src\colour.cpp
 	"Colour.h"
 
-1489756655 d:\university work\year 3\fyp\dev\raytacer\include\colour.h
+1490683648 d:\university work\year 3\fyp\dev\raytacer\include\colour.h
 	<iostream>
 
-1489928330 source:d:\university work\year 3\fyp\dev\raytacer\src\image.cpp
+1490683648 source:d:\university work\year 3\fyp\dev\raytacer\src\image.cpp
 	"Image.h"
 	<iostream>
 	<fstream>
@@ -32,9 +36,54 @@
 	<stdlib.h>
 	<stdio.h>
 
-1489927902 d:\university work\year 3\fyp\dev\raytacer\include\image.h
+1490683648 d:\university work\year 3\fyp\dev\raytacer\include\image.h
 	<cmath>
 	<string>
 	<fstream>
+	"Colour.h"
+
+1490683648 source:d:\university work\year 3\fyp\dev\raytacer\src\ray.cpp
+	"Ray.h"
+
+1490683648 d:\university work\year 3\fyp\dev\raytacer\include\ray.h
+	"Vector3D.h"
+
+1490683648 source:d:\university work\year 3\fyp\dev\raytacer\src\camera.cpp
+	"Camera.h"
+
+1490683648 d:\university work\year 3\fyp\dev\raytacer\include\camera.h
+	"Vector3D.h"
+
+1490683648 source:d:\university work\year 3\fyp\dev\raytacer\src\light.cpp
+	"Light.h"
+
+1490683648 d:\university work\year 3\fyp\dev\raytacer\include\light.h
+	"Vector3D.h"
+	"Colour.h"
+
+1490886906 source:d:\university work\year 3\fyp\dev\raytacer\src\scene.cpp
+	"Scene.h"
+	"Camera.h"
+	"Shape.h"
+	"Light.h"
+
+1491127953 d:\university work\year 3\fyp\dev\raytacer\include\scene.h
+	<vector>
+
+1491128759 source:d:\university work\year 3\fyp\dev\raytacer\src\shape.cpp
+	"Shape.h"
+	"Ray.h"
+	"Colour.h"
+
+1491128749 d:\university work\year 3\fyp\dev\raytacer\include\shape.h
+
+1491129770 source:d:\university work\year 3\fyp\dev\raytacer\src\sphere.cpp
+	"Sphere.h"
+	<iostream>
+	"Ray.h"
+
+1491128280 d:\university work\year 3\fyp\dev\raytacer\include\sphere.h
+	"Shape.h"
+	"Vector3D.h"
 	"Colour.h"
 
