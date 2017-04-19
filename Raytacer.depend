@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1491307801 source:d:\university work\year 3\fyp\dev\raytacer\main.cpp
+1492619134 source:d:\university work\year 3\fyp\dev\raytacer\main.cpp
 	<iostream>
 	"Vector3D.h"
 	"Ray.h"
@@ -8,11 +8,12 @@
 	"Image.h"
 	"Sphere.h"
 	"Scene.h"
+	"Plane.h"
 
-1490979213 d:\university work\year 3\fyp\dev\raytacer\include\vector3d.h
+1492618394 d:\university work\year 3\fyp\dev\raytacer\include\vector3d.h
 	<iostream>
 
-1490979218 source:d:\university work\year 3\fyp\dev\raytacer\src\vector3d.cpp
+1492618290 source:d:\university work\year 3\fyp\dev\raytacer\src\vector3d.cpp
 	"Vector3D.h"
 	<math.h>
 	<iostream>
@@ -48,11 +49,13 @@
 1490683648 d:\university work\year 3\fyp\dev\raytacer\include\ray.h
 	"Vector3D.h"
 
-1490683648 source:d:\university work\year 3\fyp\dev\raytacer\src\camera.cpp
+1492613114 source:d:\university work\year 3\fyp\dev\raytacer\src\camera.cpp
 	"Camera.h"
+	<cmath>
 
-1490683648 d:\university work\year 3\fyp\dev\raytacer\include\camera.h
+1492524900 d:\university work\year 3\fyp\dev\raytacer\include\camera.h
 	"Vector3D.h"
+	"Ray.h"
 
 1490683648 source:d:\university work\year 3\fyp\dev\raytacer\src\light.cpp
 	"Light.h"
@@ -77,12 +80,21 @@
 
 1491128749 d:\university work\year 3\fyp\dev\raytacer\include\shape.h
 
-1491129770 source:d:\university work\year 3\fyp\dev\raytacer\src\sphere.cpp
+1492618478 source:d:\university work\year 3\fyp\dev\raytacer\src\sphere.cpp
 	"Sphere.h"
 	<iostream>
 	"Ray.h"
 
 1491128280 d:\university work\year 3\fyp\dev\raytacer\include\sphere.h
+	"Shape.h"
+	"Vector3D.h"
+	"Colour.h"
+
+1492619113 source:d:\university work\year 3\fyp\dev\raytacer\src\plane.cpp
+	"Plane.h"
+	"Ray.h"
+
+1492618922 d:\university work\year 3\fyp\dev\raytacer\include\plane.h
 	"Shape.h"
 	"Vector3D.h"
 	"Colour.h"

@@ -40,6 +40,7 @@
 		<Unit filename="include/Colour.h" />
 		<Unit filename="include/Image.h" />
 		<Unit filename="include/Light.h" />
+		<Unit filename="include/Plane.h" />
 		<Unit filename="include/Ray.h" />
 		<Unit filename="include/Scene.h" />
 		<Unit filename="include/Shape.h" />
@@ -50,6 +51,7 @@
 		<Unit filename="src/Colour.cpp" />
 		<Unit filename="src/Image.cpp" />
 		<Unit filename="src/Light.cpp" />
+		<Unit filename="src/Plane.cpp" />
 		<Unit filename="src/Ray.cpp" />
 		<Unit filename="src/Scene.cpp" />
 		<Unit filename="src/Shape.cpp" />

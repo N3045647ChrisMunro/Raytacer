@@ -25,6 +25,7 @@ public:
 
     float magnitude(const Vector3D& vector);
     Vector3D normalize(const Vector3D& vector);
+    Vector3D normalize();
 
     // Unary Operators
     Vector3D operator+ () const;
@@ -39,6 +40,7 @@ public:
 
     // Binary Operators
     friend Vector3D operator+ (const Vector3D& A, const Vector3D& B);
+    friend Vector3D operator+ (const float A, const Vector3D& B);
     friend Vector3D operator- (const Vector3D& A, const Vector3D& B);
     friend Vector3D operator* (const Vector3D& A, const Vector3D& B);
     friend Vector3D operator* (const float A, const Vector3D& B);
@@ -52,9 +54,10 @@ public:
 
     void minimize(Vector3D& min, const Vector3D& candidate);
     void maximize(Vector3D& max, const Vector3D& candidate);
-
-protected:
-
-private:
 };
+
+inline float dotProduct(const Vector3D& A, const Vector3D& B)
+{
+    return A.x * B.x + A.y * B.y + A.z * B.z;
+}
 

@@ -66,6 +66,12 @@ Vector3D Vector3D::normalize(const Vector3D& vector)
     return vector / magnitude(vector);
 }
 
+Vector3D Vector3D::normalize()
+{
+    Vector3D temp = Vector3D(x, y, z);
+    return temp / magnitude(temp);
+}
+
 //
 // Unary Operators
 //
@@ -133,6 +139,11 @@ Vector3D operator+ (const Vector3D& A, const Vector3D& B)
     return Vector3D(A.x + B.x, A.y + B.y, A.z + B.z);
 }
 
+Vector3D operator+ (float& A, const Vector3D& B)
+{
+    return Vector3D(A + B.x, A + B.y, A + B.z);
+}
+
 Vector3D operator- (const Vector3D& A, const Vector3D& B)
 {
     return Vector3D(A.x - B.x, A.y - B.y, A.z - B.z);
@@ -143,12 +154,12 @@ Vector3D operator* (const Vector3D& A, const Vector3D& B)
     return Vector3D(A.x * B.x, A.y * B.y, A.z * B.z);
 }
 
-Vector3D operator- (const float A, const Vector3D& B)
+Vector3D operator* (const float A, const Vector3D& B)
 {
     return Vector3D(B.x * A, B.y * A, B.z * A);
 }
 
-Vector3D operator- (const Vector3D& A, const float B)
+Vector3D operator* (const Vector3D& A, const float B)
 {
     return Vector3D(A.x * B, A.y * B, A.z * B);
 }
@@ -168,12 +179,12 @@ std::ostream& operator<< (std::ostream& stream, const Vector3D& vector)
     stream << "(" << vector.x << ", " << vector.y << ", " << vector.z << ")" << std::endl;
     return stream;
 }
-
+/*
 float Vector3D::dotProduct(const Vector3D& A, const Vector3D& B)
 {
     return A.x * B.x + A.y * B.y + A.z * B.z;
 }
-
+*/
 Vector3D Vector3D::crossProduct(const Vector3D& A, const Vector3D& B)
 {
     return Vector3D(A.y * B.z - A.z * B.y,

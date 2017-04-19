@@ -31,14 +31,11 @@ bool Sphere::checkForIntersection(Ray *ray, Colour& outColour)
     const Vector3D rayOrigin = ray->getRayOrigin();
     const Vector3D rayDirection = ray->getRayDirection();
 
-
     Vector3D distanceToSphere = rayOrigin - position_;
 
-    Vector3D temp;
-
-    float A = temp.dotProduct(rayDirection, rayDirection);
-    float B = temp.dotProduct(rayDirection, distanceToSphere) * 2;
-    double C = temp.dotProduct(distanceToSphere, distanceToSphere) - radius_ * radius_;
+    float A = dotProduct(rayDirection, rayDirection);
+    float B = dotProduct(rayDirection, distanceToSphere) * 2;
+    double C = dotProduct(distanceToSphere, distanceToSphere) - radius_ * radius_;
 
     //std::cout << "A: " << A << " B: " << B << " C: "<< C << std::endl;
 
