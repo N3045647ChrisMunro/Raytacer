@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<Scene>
+    <!--Scene Contents and Information-->
+    <Camera>
+        <Position x="0" y="10" z="10" />
+        <Direction x="0" y="0" z="-1" />
+        <UpVector x="0" y="-1" z="-0" />
+        <RightVector x="1" y="-0" z="0" />
+        <Dimensions Width="1.5" Height="0.999999" />
+    </Camera>
+    <Objects>
+        <Sphere>
+            <Position x="20" y="10" z="-50" />
+            <Radius r="10" />
+            <Colour r="255" g="0" b="0" />
+        </Sphere>
+        <Sphere>
+            <Position x="-30" y="10" z="-50" />
+            <Radius r="10" />
+            <Colour r="0" g="0" b="255" />
+        </Sphere>
+        <Sphere>
+            <Position x="0" y="20" z="-75" />
+            <Radius r="20" />
+            <Colour r="156" g="255" b="78" />
+        </Sphere>
+    </Objects>
+    <Lights>
+        <Light>
+            <Position x="0" y="20" z="10" />
+            <Colour r="255" g="255" b="255" />
+        </Light>
+    </Lights>
+</Scene>

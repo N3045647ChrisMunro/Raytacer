@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1492955043 source:d:\university work\year 3\fyp\dev\raytacer\main.cpp
+1493161497 source:d:\university work\year 3\fyp\dev\raytacer\main.cpp
 	<iostream>
 	"Vector3D.h"
 	"Ray.h"
@@ -11,6 +11,7 @@
 	"Scene.h"
 	"Plane.h"
 	"RayHitData.hpp"
+	"tinyXML/tinyxml.h"
 
 1492949868 d:\university work\year 3\fyp\dev\raytacer\include\vector3d.h
 	<iostream>
@@ -52,11 +53,11 @@
 1492947852 d:\university work\year 3\fyp\dev\raytacer\include\ray.h
 	"Vector3D.h"
 
-1492954681 source:d:\university work\year 3\fyp\dev\raytacer\src\camera.cpp
+1493125881 source:d:\university work\year 3\fyp\dev\raytacer\src\camera.cpp
 	"Camera.h"
 	<cmath>
 
-1492524900 d:\university work\year 3\fyp\dev\raytacer\include\camera.h
+1493124495 d:\university work\year 3\fyp\dev\raytacer\include\camera.h
 	"Vector3D.h"
 	"Ray.h"
 
@@ -73,24 +74,25 @@
 	"Shape.h"
 	"Light.h"
 
-1491127953 d:\university work\year 3\fyp\dev\raytacer\include\scene.h
+1493123979 d:\university work\year 3\fyp\dev\raytacer\include\scene.h
 	<vector>
 
-1492870900 source:d:\university work\year 3\fyp\dev\raytacer\src\shape.cpp
+1493127538 source:d:\university work\year 3\fyp\dev\raytacer\src\shape.cpp
 	"Shape.h"
 	"Ray.h"
 	"Colour.h"
 
-1492870900 d:\university work\year 3\fyp\dev\raytacer\include\shape.h
+1493127509 d:\university work\year 3\fyp\dev\raytacer\include\shape.h
 	"RayHitData.hpp"
+	<string>
 
-1492870921 source:d:\university work\year 3\fyp\dev\raytacer\src\sphere.cpp
+1493126830 source:d:\university work\year 3\fyp\dev\raytacer\src\sphere.cpp
 	"Sphere.h"
 	<iostream>
 	"Ray.h"
 	"math.h"
 
-1492870900 d:\university work\year 3\fyp\dev\raytacer\include\sphere.h
+1493161062 d:\university work\year 3\fyp\dev\raytacer\include\sphere.h
 	"Shape.h"
 	"Vector3D.h"
 	"Colour.h"
@@ -122,4 +124,44 @@
 
 1492725007 d:\university work\year 3\fyp\dev\raytacer\include\tcpnetwork.h
 	<iostream>
+
+1493122511 source:d:\university work\year 3\fyp\dev\raytacer\src\tinyxml\tinystr.cpp
+	"tinyXML/tinystr.h"
+
+1305401098 d:\university work\year 3\fyp\dev\raytacer\include\tinyxml\tinystr.h
+	<assert.h>
+	<string.h>
+
+1493122519 source:d:\university work\year 3\fyp\dev\raytacer\src\tinyxml\tinyxml.cpp
+	<ctype.h>
+	<sstream>
+	<iostream>
+	"tinyXML/tinyxml.h"
+
+1305401098 d:\university work\year 3\fyp\dev\raytacer\include\tinyxml\tinyxml.h
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<string>
+	<iostream>
+	<sstream>
+	"tinystr.h"
+
+1493122526 source:d:\university work\year 3\fyp\dev\raytacer\src\tinyxml\tinyxmlerror.cpp
+	"tinyXML/tinyxml.h"
+
+1493122533 source:d:\university work\year 3\fyp\dev\raytacer\src\tinyxml\tinyxmlparser.cpp
+	<ctype.h>
+	<stddef.h>
+	"tinyXML/tinyxml.h"
+	<windows.h>
+
+1493122540 source:d:\university work\year 3\fyp\dev\raytacer\src\tinyxml\xmltest.cpp
+	<iostream>
+	<sstream>
+	<stdio.h>
+	<crtdbg.h>
+	"tinyXML/tinyxml.h"
 

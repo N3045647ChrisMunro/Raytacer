@@ -24,9 +24,9 @@ class Scene
         void addObject(Shape *object);
         void addLight(Light* light);
 
+        Camera *getCamera() const { return sceneCamera_; }
         std::vector<Shape *> getAllObjects() const { return objects_; }
         std::vector<Light *> getAllLights() const { return lights_; }
-
 
     private:
 

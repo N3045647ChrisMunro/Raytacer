@@ -9,6 +9,7 @@
 #pragma once
 
 #include "RayHitData.hpp"
+#include <string>
 
 class Ray;
 class Colour;
@@ -22,6 +23,10 @@ class Shape
         virtual bool checkForIntersection(RayHitData &rayHitData);
         virtual Colour getColour() const;
         virtual Vector3D getNormalAtPoint(Vector3D point);
+        virtual std::string getType() const;
+
+        virtual Vector3D getPosition() const;
+        virtual float getRadius() const; // For Spheres
 
     private:
 };

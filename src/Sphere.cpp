@@ -14,11 +14,12 @@
 Sphere::Sphere()
 {
     //ctor
+    type_ = "Sphere";
 }
 
 Sphere::Sphere(Vector3D centerPosition, float radius, Colour colour) : position_(centerPosition), radius_(radius), colour_(colour)
 {
-
+    type_ = "Sphere";
 }
 
 Sphere::~Sphere()

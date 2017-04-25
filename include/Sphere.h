@@ -22,12 +22,14 @@ class Sphere : public Shape
         Sphere(Vector3D centerPosition, float radius, Colour colour);
         ~Sphere();
 
-        float getRadius() const { return radius_; }
-        Vector3D getPosition() const { return position_; }
+        // Getters
+        virtual float getRadius() const { return radius_; }
+        virtual Vector3D getPosition() const { return position_; }
         virtual Colour getColour() const;
         virtual Vector3D getNormalAtPoint(Vector3D point);
 
         virtual bool checkForIntersection(RayHitData &rayHitData);
+        virtual std::string getType() const { return type_; }
 
     private:
 
@@ -35,4 +37,5 @@ class Sphere : public Shape
         float radius_;
         Colour colour_;
 
+        std::string type_;
 };

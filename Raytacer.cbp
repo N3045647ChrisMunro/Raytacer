@@ -48,6 +48,8 @@
 		<Unit filename="include/Sphere.h" />
 		<Unit filename="include/TCPNetwork.h" />
 		<Unit filename="include/Vector3D.h" />
+		<Unit filename="include/tinyXML/tinystr.h" />
+		<Unit filename="include/tinyXML/tinyxml.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Camera.cpp" />
 		<Unit filename="src/Colour.cpp" />
@@ -60,6 +62,10 @@
 		<Unit filename="src/Sphere.cpp" />
 		<Unit filename="src/TCPNetwork.cpp" />
 		<Unit filename="src/Vector3D.cpp" />
+		<Unit filename="src/tinyXML/tinystr.cpp" />
+		<Unit filename="src/tinyXML/tinyxml.cpp" />
+		<Unit filename="src/tinyXML/tinyxmlerror.cpp" />
+		<Unit filename="src/tinyXML/tinyxmlparser.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

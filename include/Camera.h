@@ -21,6 +21,24 @@ class Camera
 
         Ray generateRay(float u, float v);
 
+        // Getters
+        Vector3D getPosition() const { return position_; }
+        Vector3D getDirection() const { return direction_; }
+        Vector3D getUpVector() const { return upVector_; }
+        Vector3D getRightVector() const { return rightVector_; }
+
+        float getWidth() const { return width_; }
+        float getHeight() const { return height_; }
+
+        // Setters
+        void setPosition(Vector3D pos);
+        void setDirection(Vector3D dir);
+        void setUpVector(Vector3D upVec);
+        void setRightVector(Vector3D rightVec);
+        void setWidth(float width);
+        void setHeight(float height);
+
+
     private:
 
         Vector3D position_;

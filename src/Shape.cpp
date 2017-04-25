@@ -34,3 +34,18 @@ Vector3D Shape::getNormalAtPoint(Vector3D point)
 {
     return Vector3D();
 }
+
+std::string Shape::getType() const
+{
+    return "";
+}
+
+Vector3D Shape::getPosition() const
+{
+    return Vector3D();
+}
+
+float Shape::getRadius() const
+{
+    return 0.f;
+}

@@ -33,9 +33,35 @@ Ray Camera::generateRay(float u, float v)
 {
     Vector3D rayDirection = direction_ + u * width_ * rightVector_ + v * height_ * upVector_;
 
-    //std::cout << rayDirection << std::endl;
-
     return Ray(position_, rayDirection.normalize());
+}
 
+void Camera::setPosition(Vector3D pos)
+{
+    position_ = pos;
+}
 
+void Camera::setDirection(Vector3D dir)
+{
+    direction_ = dir;
+}
+
+void Camera::setUpVector(Vector3D upVec)
+{
+    upVector_ = upVec;
+}
+
+void Camera::setRightVector(Vector3D rightVec)
+{
+    rightVector_ = rightVec;
+}
+
+void Camera::setWidth(float width)
+{
+    width_ = width;
+}
+
+void Camera::setHeight(float height)
+{
+    height_ = height;
 }
