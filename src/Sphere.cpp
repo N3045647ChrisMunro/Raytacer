@@ -10,7 +10,7 @@
 
 #include <iostream>
 #include "Ray.h"
-
+#include "math.h"
 Sphere::Sphere()
 {
     //ctor
@@ -26,10 +26,11 @@ Sphere::~Sphere()
     //dtor
 }
 
-bool Sphere::checkForIntersection(Ray *ray, Colour& outColour)
+bool Sphere::checkForIntersection(RayHitData &rayHitData)
 {
-    const Vector3D rayOrigin = ray->getRayOrigin();
-    const Vector3D rayDirection = ray->getRayDirection();
+    Ray ray = rayHitData.ray;
+    const Vector3D rayOrigin = ray.getRayOrigin();
+    const Vector3D rayDirection = ray.getRayDirection();
 
     Vector3D distanceToSphere = rayOrigin - position_;
 
@@ -42,6 +43,20 @@ bool Sphere::checkForIntersection(Ray *ray, Colour& outColour)
     float discriminant = B * B - 4 * A * C;
 
     if(discriminant > 0){
+
+        float t1 = (-B - sqrt(discriminant)) / (2 * A);
+        float t2 = (-B + sqrt(discriminant)) / (2 * A);
+
+        if(t1 > ray.getMinDistance() && t1 < rayHitData.t)
+            rayHitData.t = t1;
+        else if(t2 > ray.getMinDistance() && t2 < rayHitData.t)
+            rayHitData.t = t2;
+        else
+            return false;
+
+        rayHitData.shape = this;
+        rayHitData.colour = colour_;
+
         return true;
     }
 
@@ -51,6 +66,12 @@ bool Sphere::checkForIntersection(Ray *ray, Colour& outColour)
 Colour Sphere::getColour() const
 {
     return colour_;
+}
+
+Vector3D Sphere::getNormalAtPoint(Vector3D point)
+{
+    const Vector3D normal = point + position_.normalize();
+    return normal;
 }
 
 

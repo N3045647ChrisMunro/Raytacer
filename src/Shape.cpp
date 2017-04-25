@@ -20,12 +20,17 @@ Shape::~Shape()
     //dtor
 }
 
-bool Shape::checkForIntersection(Ray *ray, Colour& outColour)
+bool Shape::checkForIntersection(RayHitData &rayHitData)
 {
     return false;
 }
 
 Colour Shape::getColour() const
 {
+    return Colour();
+}
 
+Vector3D Shape::getNormalAtPoint(Vector3D point)
+{
+    return Vector3D();
 }

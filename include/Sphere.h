@@ -11,6 +11,7 @@
 #include "Shape.h"
 #include "Vector3D.h"
 #include "Colour.h"
+#include "RayHitData.hpp"
 
 class Ray;
 
@@ -24,8 +25,9 @@ class Sphere : public Shape
         float getRadius() const { return radius_; }
         Vector3D getPosition() const { return position_; }
         virtual Colour getColour() const;
+        virtual Vector3D getNormalAtPoint(Vector3D point);
 
-        virtual bool checkForIntersection(Ray *ray, Colour& outColour);
+        virtual bool checkForIntersection(RayHitData &rayHitData);
 
     private:
 

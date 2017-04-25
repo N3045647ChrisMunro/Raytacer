@@ -4,6 +4,7 @@
 #include "Shape.h"
 #include "Vector3D.h"
 #include "Colour.h"
+#include "RayHitData.hpp"
 
 class Ray;
 
@@ -14,8 +15,9 @@ class Plane : public Shape
         Plane(const Vector3D& position, const Vector3D& normal, const Colour& colour);
         ~Plane();
 
-        virtual bool checkForIntersection(Ray *ray, Colour& outColour);
+        virtual bool checkForIntersection(RayHitData &rayHitData);
         virtual Colour getColour() const { return colour_; }
+        virtual Vector3D getNormalAtPoint(Vector3D point);
 
     private:
 

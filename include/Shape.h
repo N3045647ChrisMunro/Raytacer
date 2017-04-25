@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include "RayHitData.hpp"
+
 class Ray;
 class Colour;
 
@@ -17,8 +19,9 @@ class Shape
         Shape();
         virtual ~Shape();
 
-        virtual bool checkForIntersection(Ray *ray, Colour& outColour);
+        virtual bool checkForIntersection(RayHitData &rayHitData);
         virtual Colour getColour() const;
+        virtual Vector3D getNormalAtPoint(Vector3D point);
 
     private:
 };

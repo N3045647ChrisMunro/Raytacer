@@ -13,8 +13,10 @@
 #include "Colour.h"
 #include "Image.h"
 #include "Sphere.h"
+#include "Light.h"
 #include "Scene.h"
 #include "Plane.h"
+#include "RayHitData.hpp"
 
 using namespace std;
 
@@ -29,29 +31,39 @@ int main()
 
     const int width = 1080;
     const int height = 720;
-    Image image(width, height, Colour(89, 89, 89));
+    Image image(width, height, Colour(0, 0, 0));
 
-    Vector3D cameraPosition(0.f, 5.f, -10.f);
-    Vector3D lookAt(0.f, 0.0f, 0.f);
+    Vector3D cameraPosition(0.f, 10.0f, 10.f);
+    Vector3D lookAt(0.f, 10.0f, 0.f);
     float aspectRatio = (float)width / (float)height;
 
     Camera *mainCamera = new Camera(cameraPosition, lookAt, Vector3D(0.f, 1.f, 0.f), 3.14159 / 4, aspectRatio);
     Scene *scene = new Scene();
 
     Colour col4(0, 0, 0);
-    Sphere *sphere = new Sphere(Vector3D(0.0f, 0.0f, 500.0f), 50.0f, col2);
-    Sphere *sphere2 = new Sphere(Vector3D(150.0, 0.0, 250.0), 50.f, Colour(0, 0, 255));
+    Sphere *sphere = new Sphere(Vector3D(20.0f, 10.0f, -50.f), 10.0f, col2);
+    Sphere *sphere2 = new Sphere(Vector3D(-30.0, 10.0, -50.0), 10.f, Colour(0, 0, 255));
+    Sphere *sphere3 = new Sphere(Vector3D(0.0, 20.0, -75.0), 20.f, Colour(156, 255, 78));
 
-    Plane* groundPlane = new Plane(Vector3D(0.0f, -1.0f, 0.0f), Vector3D(0.0f, 1.0f, 0.f), Colour(114, 106, 67));
+    Plane *groundPlane = new Plane(Vector3D(0.0f, 0.0f, 0.0f), Vector3D(0.0f, 1.0f, 0.f), Colour(114, 106, 67));
 
-    //scene->addObject(sphere2);
+    Vector3D lightPos(0.f, 20.f, 10.f);
+    Vector3D lightDir = lightPos - Vector3D(0.0, 0.0, 0.0);
+    Light *light = new Light(lightPos, lightDir, Colour(255, 255, 255));
+
+    scene->setSceneCamera(mainCamera);
     scene->addObject(groundPlane);
     scene->addObject(sphere);
+    scene->addObject(sphere2);
+    scene->addObject(sphere3);
+    scene->addLight(light);
 
     std::cout << "Rendering..." << std::endl;
 
-    for(int y = 0; y < height; y++){
-        for(int x = 0; x < width; x++){
+    int antiAliasedSampling = 2;
+
+    for(int x = 0; x < width; x++){
+        for(int y = 0; y < height; y++){
 
             const float u = (2.0f * x) / width - 1.0f;
             const float v = (-2.0f * y) / height + 1.0f;
@@ -59,7 +71,11 @@ int main()
             Ray ray;
             ray = mainCamera->generateRay(u, v);
 
+            RayHitData rayHitData;
+            rayHitData.ray = ray;
+
             std::vector<Shape*> objects = scene->getAllObjects();
+            std::vector<Light*> lights = scene->getAllLights();
 
             //std::cout << objects.size() << std::endl;
 
@@ -67,14 +83,30 @@ int main()
 
                 for(unsigned int i = 0; i < objects.size(); i++){
 
-                    if(objects[i]->checkForIntersection(&ray, col4)){
-                        col4 = objects[i]->getColour();
-                        image.set(x, y, col4);
-                    }else{
-                        //image.set(x, y, Colour(89, 89, 89));
-                    }
+                    if(objects[i]->checkForIntersection(rayHitData)){
 
-                    //std::cout << "I: " << i << std::endl;
+                        col4 = rayHitData.colour;
+                        image.set(x, y, col4);
+
+                        /*for(unsigned int j = 0; j < lights.size(); j++){
+
+                            Vector3D intersectionPoint = ray.calculatePointOnRay(rayHitData.t);
+                            Vector3D shadowRayDirection = lights[j]->getPosition() - intersectionPoint;
+                            float distToLight = shadowRayDirection.magnitude();
+                            shadowRayDirection = shadowRayDirection.normalize();
+
+                            Vector3D intersectNormal = rayHitData.shape->getNormalAtPoint(intersectionPoint);
+
+                            bool shadowed = false;
+
+                            RayHitData shadowHitData;
+
+                            Ray shadowRay(intersectionPoint * 0.0001, shadowRayDirection);
+
+                            shadowHitData.ray = shadowRay;
+
+                        }*/
+                    }
 
                 }
             }

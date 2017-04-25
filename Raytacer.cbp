@@ -42,9 +42,11 @@
 		<Unit filename="include/Light.h" />
 		<Unit filename="include/Plane.h" />
 		<Unit filename="include/Ray.h" />
+		<Unit filename="include/RayHitData.hpp" />
 		<Unit filename="include/Scene.h" />
 		<Unit filename="include/Shape.h" />
 		<Unit filename="include/Sphere.h" />
+		<Unit filename="include/TCPNetwork.h" />
 		<Unit filename="include/Vector3D.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Camera.cpp" />
@@ -56,6 +58,7 @@
 		<Unit filename="src/Scene.cpp" />
 		<Unit filename="src/Shape.cpp" />
 		<Unit filename="src/Sphere.cpp" />
+		<Unit filename="src/TCPNetwork.cpp" />
 		<Unit filename="src/Vector3D.cpp" />
 		<Extensions>
 			<code_completion />

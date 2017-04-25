@@ -21,10 +21,18 @@ class Ray
         Vector3D getRayOrigin() const { return origin_; }
         Vector3D getRayDirection() const { return direction_; }
 
+        float getMaxDistance() const { return maxDistance_; }
+        float getMinDistance() const { return minDistance_; }
+
+        Vector3D calculatePointOnRay(const float t);
+
     private:
 
         Vector3D origin_;
         Vector3D direction_;
+
+        float maxDistance_;
+        float minDistance_;
 
 };
 

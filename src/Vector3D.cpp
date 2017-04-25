@@ -61,6 +61,11 @@ float Vector3D::magnitude(const Vector3D& vector)
     return sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
 }
 
+float Vector3D::magnitude()
+{
+    return sqrt(x * x + y * y + z * z);
+}
+
 Vector3D Vector3D::normalize(const Vector3D& vector)
 {
     return vector / magnitude(vector);

@@ -15,12 +15,10 @@ Camera::Camera(Vector3D position, Vector3D target, Vector3D upVector, const floa
                position_(position)
 {
 
-    direction_ = (target - position);
-    direction_ = direction_.normalize();
+    direction_ = direction_.normalize(target - position);
 
-    rightVector_ = rightVector_.crossProduct(direction_, upVector);
-    rightVector_ = rightVector_.normalize();
-    upVector_ = upVector.crossProduct(rightVector_, direction_);
+    rightVector_ = crossProduct(direction_, upVector.normalize());
+    upVector_ = crossProduct(direction_, rightVector_);
 
     height_ = tan(fieldOfView);
     width_ = height_ * aspectRatio;
@@ -37,7 +35,7 @@ Ray Camera::generateRay(float u, float v)
 
     //std::cout << rayDirection << std::endl;
 
-    return Ray(position_, rayDirection);
+    return Ray(position_, rayDirection.normalize());
 
 
 }

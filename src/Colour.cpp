@@ -49,13 +49,13 @@ Colour normalizeColour(const Colour& colour)
 */
 void Colour::clamp()
 {
-    if(r > 1.f) r = 1.f;
-    if(g > 1.f) g = 1.f;
-    if(b > 1.f) b = 1.f;
+    if(r > 255.f) r = 255.f;
+    if(g > 255.f) g = 255.f;
+    if(b > 255.f) b = 255.f;
 
     if(r < 0.f) r = 0.f;
-    if(r < 0.f) r = 0.f;
-    if(r < 0.f) r = 0.f;
+    if(g < 0.f) g = 0.f;
+    if(b < 0.f) b = 0.f;
 
 }
 

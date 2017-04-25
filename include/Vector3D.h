@@ -24,6 +24,7 @@ public:
     void extractVerts(float *px, float *py, int which) const;
 
     float magnitude(const Vector3D& vector);
+    float magnitude();
     Vector3D normalize(const Vector3D& vector);
     Vector3D normalize();
 
@@ -60,4 +61,12 @@ inline float dotProduct(const Vector3D& A, const Vector3D& B)
 {
     return A.x * B.x + A.y * B.y + A.z * B.z;
 }
+
+inline Vector3D crossProduct(const Vector3D& A, const Vector3D& B)
+{
+        return Vector3D(A.y * B.z - A.z * B.y,
+                        A.z * B.x - A.x * B.z,
+                        A.x * B.y - A.y * B.x);
+}
+
 
