@@ -43,7 +43,16 @@ void Scene::addObject(Shape *shape)
     objects_.push_back(shape);
 }
 
+void Scene::addObjects(std::vector<Shape *> objects)
+{
+    objects_ = objects;
+}
 void Scene::addLight(Light *light)
 {
     lights_.push_back(light);
+}
+
+void Scene::addLights(std::vector<Light *> lights)
+{
+    lights_ = lights;
 }

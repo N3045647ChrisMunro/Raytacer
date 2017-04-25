@@ -22,7 +22,9 @@ class Scene
 
         void setSceneCamera(Camera *camera);
         void addObject(Shape *object);
+        void addObjects(std::vector<Shape *> objects);
         void addLight(Light* light);
+        void addLights(std::vector<Light *> lights);
 
         Camera *getCamera() const { return sceneCamera_; }
         std::vector<Shape *> getAllObjects() const { return objects_; }

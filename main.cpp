@@ -62,8 +62,8 @@ int main()
     scene->addObject(sphere3);
     scene->addLight(light);
 
-    serializeScene(scene, "Scene.xml");
-    //loadSceneDataFromXml("Scene.xml");
+    //serializeScene(scene, "Scene.xml");
+    //scene = loadSceneDataFromXml("Scene.xml");
 
     std::cout << "Rendering..." << std::endl;
 
@@ -226,6 +226,33 @@ void serializeScene(Scene *scene, std::string filename)
 
             }
 
+            if(sceneObjects[i]->getType() == "Plane"){
+
+                TiXmlElement *newPlane = new TiXmlElement("Plane");
+                objectsNode->LinkEndChild(newPlane);
+
+                // Add position
+                nodeData = new TiXmlElement("Position");
+                nodeData->SetDoubleAttribute("x", sceneObjects[i]->getPosition().x);
+                nodeData->SetDoubleAttribute("y", sceneObjects[i]->getPosition().y);
+                nodeData->SetDoubleAttribute("z", sceneObjects[i]->getPosition().z);
+                newPlane->LinkEndChild(nodeData);
+
+                // Add Normal
+                nodeData = new TiXmlElement("Normal");
+                nodeData->SetDoubleAttribute("x", sceneObjects[i]->getNormal().x);
+                nodeData->SetDoubleAttribute("y", sceneObjects[i]->getNormal().y);
+                nodeData->SetDoubleAttribute("z", sceneObjects[i]->getNormal().z);
+                newPlane->LinkEndChild(nodeData);
+
+                // Add Colour
+                nodeData = new TiXmlElement("Colour");
+                nodeData->SetAttribute("r", sceneObjects[i]->getColour().r);
+                nodeData->SetAttribute("g", sceneObjects[i]->getColour().g);
+                nodeData->SetAttribute("b", sceneObjects[i]->getColour().b);
+                newPlane->LinkEndChild(nodeData);
+
+            }
         }
 
     }
@@ -256,9 +283,7 @@ void serializeScene(Scene *scene, std::string filename)
             newLight->LinkEndChild(nodeData);
 
         }
-
     }
-
 
     xmlDoc.SaveFile(filename.c_str());
 }
@@ -342,6 +367,66 @@ Scene* loadSceneDataFromXml(std::string filepath)
 
             if(objectsNode != nullptr){
 
+                //**** Planes
+                TiXmlElement *planeNode = objectsNode->FirstChildElement("Plane");
+
+                if(planeNode != nullptr){
+
+                    while(planeNode){
+
+                        Vector3D pos;
+                        Vector3D normal;
+                        Colour colour;
+
+                        nodeData = planeNode->FirstChildElement("Position");
+
+                        if(nodeData != nullptr){
+
+                            double x, y, z;
+                            nodeData->QueryDoubleAttribute("x", &x);
+                            nodeData->QueryDoubleAttribute("y", &y);
+                            nodeData->QueryDoubleAttribute("z", &z);
+
+                            pos = Vector3D((float)x, (float)y, (float)z);
+
+                        }
+
+                        nodeData = planeNode->FirstChildElement("Normal");
+
+                        if(nodeData != nullptr){
+
+                            double x, y, z;
+                            nodeData->QueryDoubleAttribute("x", &x);
+                            nodeData->QueryDoubleAttribute("y", &y);
+                            nodeData->QueryDoubleAttribute("z", &z);
+
+                            normal = Vector3D((float)x, (float)y, (float)z);
+
+                        }
+
+                        nodeData = planeNode->FirstChildElement("Colour");
+
+                        if(nodeData != nullptr){
+
+                            int r, g, b;
+                            nodeData->QueryIntAttribute("r", &r);
+                            nodeData->QueryIntAttribute("g", &g);
+                            nodeData->QueryIntAttribute("b", &b);
+
+                            colour = Colour(r, g, b);
+
+                        }
+
+                        Plane *tmp = new Plane(pos, normal, colour);
+                        objects.push_back(tmp);
+
+                        planeNode = planeNode->NextSiblingElement("Plane");
+
+                    }
+
+                }
+
+                //**** Spheres
                 TiXmlElement *sphereNode = objectsNode->FirstChildElement("Sphere");
 
                 if(sphereNode != nullptr){
@@ -456,5 +541,9 @@ Scene* loadSceneDataFromXml(std::string filepath)
 
 
     }
+
+    scene->setSceneCamera(camera);
+    scene->addObjects(objects);
+    scene->addLights(lights);
 
 }

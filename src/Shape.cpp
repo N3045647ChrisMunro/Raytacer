@@ -35,6 +35,11 @@ Vector3D Shape::getNormalAtPoint(Vector3D point)
     return Vector3D();
 }
 
+Vector3D Shape::getNormal() const
+{
+    return Vector3D();
+}
+
 std::string Shape::getType() const
 {
     return "";

@@ -23,6 +23,7 @@ class Shape
         virtual bool checkForIntersection(RayHitData &rayHitData);
         virtual Colour getColour() const;
         virtual Vector3D getNormalAtPoint(Vector3D point);
+        virtual Vector3D getNormal() const; // For Planes
         virtual std::string getType() const;
 
         virtual Vector3D getPosition() const;

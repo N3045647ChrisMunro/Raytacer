@@ -4,11 +4,12 @@
 Plane::Plane()
 {
     //ctor
+    type_ = "Plane";
 }
 
 Plane::Plane(const Vector3D& position, const Vector3D& normal, const Colour& colour) : position_(position), normal_(normal), colour_(colour)
 {
-
+    type_ = "Plane";
 }
 
 Plane::~Plane()
