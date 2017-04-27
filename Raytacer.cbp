@@ -43,6 +43,7 @@
 		<Unit filename="include/Plane.h" />
 		<Unit filename="include/Ray.h" />
 		<Unit filename="include/RayHitData.hpp" />
+		<Unit filename="include/Raytracer.h" />
 		<Unit filename="include/Scene.h" />
 		<Unit filename="include/Shape.h" />
 		<Unit filename="include/Sphere.h" />
@@ -57,6 +58,7 @@
 		<Unit filename="src/Light.cpp" />
 		<Unit filename="src/Plane.cpp" />
 		<Unit filename="src/Ray.cpp" />
+		<Unit filename="src/Raytracer.cpp" />
 		<Unit filename="src/Scene.cpp" />
 		<Unit filename="src/Shape.cpp" />
 		<Unit filename="src/Sphere.cpp" />

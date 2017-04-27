@@ -18,7 +18,7 @@ Camera::Camera(Vector3D position, Vector3D target, Vector3D upVector, const floa
     direction_ = direction_.normalize(target - position);
 
     rightVector_ = crossProduct(direction_, upVector.normalize());
-    upVector_ = crossProduct(direction_, rightVector_);
+    upVector_ = crossProduct(direction_, rightVector_.normalize());
 
     height_ = tan(fieldOfView);
     width_ = height_ * aspectRatio;

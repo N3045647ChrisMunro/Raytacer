@@ -16,7 +16,9 @@
 #include "Light.h"
 #include "Scene.h"
 #include "Plane.h"
-#include "RayHitData.hpp"
+#include "Raytracer.h"
+
+
 #include "tinyXML/tinyxml.h"
 
 using namespace std;
@@ -26,8 +28,6 @@ Scene* loadSceneDataFromXml(std::string filepath);
 
 int main()
 {
-    cout << "Hello world!" << endl;
-
     Colour col1(153, 230, 255);
     Colour col2(255, 0, 0);
 
@@ -35,7 +35,7 @@ int main()
 
     const int width = 1080;
     const int height = 720;
-    Image image(width, height, Colour(0, 0, 0));
+    Image *image = new Image(width, height, Colour(0, 0, 0));
 
     Vector3D cameraPosition(0.f, 10.0f, 10.f);
     Vector3D lookAt(0.f, 10.0f, 0.f);
@@ -65,64 +65,9 @@ int main()
     //serializeScene(scene, "Scene.xml");
     //scene = loadSceneDataFromXml("Scene.xml");
 
-    std::cout << "Rendering..." << std::endl;
+    Raytracer *rayTracer = new Raytracer();
 
-    int antiAliasedSampling = 2;
-
-    for(int x = 0; x < width; x++){
-        for(int y = 0; y < height; y++){
-
-            const float u = (2.0f * x) / width - 1.0f;
-            const float v = (-2.0f * y) / height + 1.0f;
-
-            Ray ray;
-            ray = mainCamera->generateRay(u, v);
-
-            RayHitData rayHitData;
-            rayHitData.ray = ray;
-
-            std::vector<Shape*> objects = scene->getAllObjects();
-            std::vector<Light*> lights = scene->getAllLights();
-
-            //std::cout << objects.size() << std::endl;
-
-            if(objects.size() > 0){
-
-                for(unsigned int i = 0; i < objects.size(); i++){
-
-                    if(objects[i]->checkForIntersection(rayHitData)){
-
-                        col4 = rayHitData.colour;
-                        image.set(x, y, col4);
-
-                        /*for(unsigned int j = 0; j < lights.size(); j++){
-
-                            Vector3D intersectionPoint = ray.calculatePointOnRay(rayHitData.t);
-                            Vector3D shadowRayDirection = lights[j]->getPosition() - intersectionPoint;
-                            float distToLight = shadowRayDirection.magnitude();
-                            shadowRayDirection = shadowRayDirection.normalize();
-
-                            Vector3D intersectNormal = rayHitData.shape->getNormalAtPoint(intersectionPoint);
-
-                            bool shadowed = false;
-
-                            RayHitData shadowHitData;
-
-                            Ray shadowRay(intersectionPoint * 0.0001, shadowRayDirection);
-
-                            shadowHitData.ray = shadowRay;
-
-                        }*/                   }
-
-                }
-            }
-
-        }
-    }
-
-    image.saveImage("test.bmp");
-
-    std::cout << "Done." << std::endl;
+    rayTracer->renderScene(scene, image, "test1.bmp", 0, 0, image->getWidth(), image->getHeight());
 
     return 0;
 }

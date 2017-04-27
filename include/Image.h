@@ -31,6 +31,10 @@ class Image
 
         void saveImage(const char* filename);
 
+        // Getters
+        int getWidth() const { return width_ ;}
+        int getHeight() const { return height_; }
+
     private:
         Colour** raster_;
         int width_;

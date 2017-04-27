@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1493164374 source:d:\university work\year 3\fyp\dev\raytacer\main.cpp
+1493302937 source:d:\university work\year 3\fyp\dev\raytacer\main.cpp
 	<iostream>
 	"Vector3D.h"
 	"Ray.h"
@@ -10,7 +10,7 @@
 	"Light.h"
 	"Scene.h"
 	"Plane.h"
-	"RayHitData.hpp"
+	"Raytracer.h"
 	"tinyXML/tinyxml.h"
 
 1492949868 d:\university work\year 3\fyp\dev\raytacer\include\vector3d.h
@@ -40,7 +40,7 @@
 	<stdlib.h>
 	<stdio.h>
 
-1490683648 d:\university work\year 3\fyp\dev\raytacer\include\image.h
+1493301736 d:\university work\year 3\fyp\dev\raytacer\include\image.h
 	<cmath>
 	<string>
 	<fstream>
@@ -53,7 +53,7 @@
 1492947852 d:\university work\year 3\fyp\dev\raytacer\include\ray.h
 	"Vector3D.h"
 
-1493125881 source:d:\university work\year 3\fyp\dev\raytacer\src\camera.cpp
+1493300950 source:d:\university work\year 3\fyp\dev\raytacer\src\camera.cpp
 	"Camera.h"
 	<cmath>
 
@@ -165,4 +165,20 @@
 	<stdio.h>
 	<crtdbg.h>
 	"tinyXML/tinyxml.h"
+
+1493303417 source:d:\university work\year 3\fyp\dev\raytacer\src\raytracer.cpp
+	"Raytracer.h"
+	<iostream>
+	"Image.h"
+	"Ray.h"
+	"Camera.h"
+	"Scene.h"
+	"Shape.h"
+	"Light.h"
+	"Colour.h"
+	"Sphere.h"
+	"Plane.h"
+
+1493303345 d:\university work\year 3\fyp\dev\raytacer\include\raytracer.h
+	<string>
 
