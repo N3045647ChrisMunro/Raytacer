@@ -69,7 +69,7 @@ bool Raytracer::renderScene(Scene *scene, Image *image, std::string filepath, co
                 std::vector<Light*> lights = scene->getAllLights();
 
                 //std::cout << objects.size() << std::endl;
-
+                Colour col = Colour(0, 0, 0);
 
                 if(objects.size() > 0){
 
@@ -77,10 +77,8 @@ bool Raytracer::renderScene(Scene *scene, Image *image, std::string filepath, co
 
                         if(objects[i]->checkForIntersection(rayHitData)){
 
-                            //std::cout << objects[i]->getType() << std::endl;
                             intersectionPoint = ray.calculatePointOnRay(rayHitData.t);
                             intersectNormal = objects[i]->getNormalAtPoint(intersectionPoint);
-
 
                             float dist = distance(mainCamera->getPosition(), intersectionPoint);
 
@@ -91,36 +89,42 @@ bool Raytracer::renderScene(Scene *scene, Image *image, std::string filepath, co
 
                             if(tmpShape != nullptr){
 
-                                lightDirection = Vector3D(10.0, 40.0, -80.0) - intersectionPoint;
-                                Vector3D shadowRayDirection = Vector3D(10.0, 40.0, -70.0) - intersectionPoint;
+                                if(lights.size() > 0){
 
-                                Ray shadowRay(intersectionPoint * 0.0001, -shadowRayDirection);
-                                RayHitData shadowRayHitData;
-                                shadowRayHitData.ray = shadowRay;
+                                    for(unsigned int k = 0; k < lights.size(); k++){
 
-                                for(unsigned int i = 0; i < objects.size(); i++){
+                                        lightDirection = lights[k]->getPosition() - intersectionPoint;
+                                        Vector3D shadowRayDirection = intersectionPoint - lights[k]->getPosition();
 
-                                    if(objects[i]->checkForIntersection(shadowRayHitData)){
-                                        std::cout << "T" << std::endl;
-                                        //isShadow = true;
-                                        break;
+                                        Ray shadowRay(intersectionPoint * 0.0001, shadowRayDirection);
+                                        RayHitData shadowRayHitData;
+                                        shadowRayHitData.ray = shadowRay;
+
+                                        for(unsigned int j = 0; j < objects.size(); j++){
+
+                                            if(objects[j]->checkForIntersection(shadowRayHitData)){
+                                                //isShadow = true;
+                                            }
+                                            break;
+                                        }
+
+                                        if(!isShadow){
+                                            col += (lights[k]->getColour() * dotProduct(intersectNormal.normalize(), lightDirection.normalize()) * (tmpShape->getColour()*1.0f));
+                                            //col = col / 255;
+                                            //std::cout << col;
+
+                                        }
+                                        else{
+                                            col += (lights[k]->getColour() * dotProduct(intersectNormal.normalize(), lightDirection.normalize()) * (tmpShape->getColour()*0.1f));
+                                            col = col / 255;
+                                        }
                                     }
-
-                                }
-
-
-                                if(!isShadow){
-                                    Colour col = (Colour(255, 255, 255) * dotProduct(intersectNormal.normalize(), lightDirection.normalize()) * (tmpShape->getColour()*1.0f));
                                     col = col / 255;
-                                    //std::cout << col;
                                     col.clamp();
                                     image->set(x, y, col);
-                                }
-                                else{
-                                    Colour col = tmpShape->getColour() * 0.10f;
-                                    image->set(x, y, col);
-                                }
 
+
+                                }
                             }
 
                         }

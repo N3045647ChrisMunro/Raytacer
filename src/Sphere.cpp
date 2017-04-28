@@ -71,7 +71,7 @@ Colour Sphere::getColour() const
 
 Vector3D Sphere::getNormalAtPoint(Vector3D point)
 {
-    const Vector3D normal = point + position_.normalize();
+    const Vector3D normal = point - position_;
     return normal;
 }
 

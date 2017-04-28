@@ -15,17 +15,15 @@ class Light
 {
     public:
         Light();
-        Light(Vector3D position, Vector3D direction, Colour lightColour);
+        Light(Vector3D position, Colour lightColour);
         ~Light();
 
         Vector3D getPosition() const { return position_; }
-        Vector3D getDirection() const { return direction_; }
         Colour getColour() const { return colour_; }
 
     private:
 
         Vector3D position_;
-        Vector3D direction_;
         Colour colour_;
 
 };
