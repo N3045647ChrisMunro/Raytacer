@@ -11,6 +11,7 @@
 #include "Colour.h"
 #include "Sphere.h"
 #include "Plane.h"
+#include <limits>
 
 Raytracer::Raytracer()
 {
@@ -33,6 +34,16 @@ bool Raytracer::renderScene(Scene *scene, Image *image, std::string filepath, co
         int x = startIDX_X;
         int y = startIDX_Y;
 
+        bool isShadow = false;
+        Shape *tmpShape = new Shape();
+
+        float invWidth = 1 / (float)image->getWidth();
+        float invHeight = 1 / (float)image->getHeight();
+
+        float fov = 30;
+        float aspectRatio = image->getWidth() / (float)image->getHeight();
+        float angle = tan(3.14159 * 0.5 * fov / 180);
+
         for(x = 0; x < endIDX_X; x++){
             for(y = 0; y < endIDX_Y; y++){
 
@@ -46,10 +57,19 @@ bool Raytracer::renderScene(Scene *scene, Image *image, std::string filepath, co
                 RayHitData rayHitData;
                 rayHitData.ray = ray;
 
+                Vector3D intersectionPoint;
+                Vector3D intersectNormal;
+
+                Vector3D lightDirection;
+
+
+                float minDistance = std::numeric_limits<float>::infinity();
+
                 std::vector<Shape*> objects = scene->getAllObjects();
                 std::vector<Light*> lights = scene->getAllLights();
 
                 //std::cout << objects.size() << std::endl;
+
 
                 if(objects.size() > 0){
 
@@ -57,29 +77,55 @@ bool Raytracer::renderScene(Scene *scene, Image *image, std::string filepath, co
 
                         if(objects[i]->checkForIntersection(rayHitData)){
 
-                            Colour col = rayHitData.colour;
-                            image->set(x, y, col);
+                            //std::cout << objects[i]->getType() << std::endl;
+                            intersectionPoint = ray.calculatePointOnRay(rayHitData.t);
+                            intersectNormal = objects[i]->getNormalAtPoint(intersectionPoint);
 
-                            /*for(unsigned int j = 0; j < lights.size(); j++){
 
-                                Vector3D intersectionPoint = ray.calculatePointOnRay(rayHitData.t);
-                                Vector3D shadowRayDirection = lights[j]->getPosition() - intersectionPoint;
-                                float distToLight = shadowRayDirection.magnitude();
-                                shadowRayDirection = shadowRayDirection.normalize();
+                            float dist = distance(mainCamera->getPosition(), intersectionPoint);
 
-                                Vector3D intersectNormal = rayHitData.shape->getNormalAtPoint(intersectionPoint);
+                            if(dist < minDistance){
+                                tmpShape = objects[i];
+                                minDistance = dist;
+                            }
 
-                                bool shadowed = false;
+                            if(tmpShape != nullptr){
 
-                                RayHitData shadowHitData;
+                                lightDirection = Vector3D(10.0, 40.0, -80.0) - intersectionPoint;
+                                Vector3D shadowRayDirection = Vector3D(10.0, 40.0, -70.0) - intersectionPoint;
 
-                                Ray shadowRay(intersectionPoint * 0.0001, shadowRayDirection);
+                                Ray shadowRay(intersectionPoint * 0.0001, -shadowRayDirection);
+                                RayHitData shadowRayHitData;
+                                shadowRayHitData.ray = shadowRay;
 
-                                shadowHitData.ray = shadowRay;
+                                for(unsigned int i = 0; i < objects.size(); i++){
 
-                            }*/                   }
+                                    if(objects[i]->checkForIntersection(shadowRayHitData)){
+                                        std::cout << "T" << std::endl;
+                                        //isShadow = true;
+                                        break;
+                                    }
 
+                                }
+
+
+                                if(!isShadow){
+                                    Colour col = (Colour(255, 255, 255) * dotProduct(intersectNormal.normalize(), lightDirection.normalize()) * (tmpShape->getColour()*1.0f));
+                                    col = col / 255;
+                                    //std::cout << col;
+                                    col.clamp();
+                                    image->set(x, y, col);
+                                }
+                                else{
+                                    Colour col = tmpShape->getColour() * 0.10f;
+                                    image->set(x, y, col);
+                                }
+
+                            }
+
+                        }
                     }
+
                 }
 
             }
@@ -93,6 +139,32 @@ bool Raytracer::renderScene(Scene *scene, Image *image, std::string filepath, co
         std::cerr << "Rendering Failed: Exception Occurred: " << e.what() << std::endl;
     }
 
-
-
 }
+
+/*
+
+
+                            Ray shadowRay(intersectionPoint, shadowRayDirection);
+
+                            bool isShadow = false;
+
+                            for()
+
+                            for(unsigned int j = 0; j < lights.size(); j++){
+
+
+                                float distToLight = shadowRayDirection.magnitude();
+                                shadowRayDirection = shadowRayDirection.normalize();
+
+                                Vector3D intersectNormal = rayHitData.shape->getNormalAtPoint(intersectionPoint);
+
+                                bool shadowed = false;
+
+                                RayHitData shadowHitData;
+
+                                Ray shadowRay(intersectionPoint * 0.0001, shadowRayDirection);
+
+                                shadowHitData.ray = shadowRay;
+
+                            }
+*/

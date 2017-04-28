@@ -32,7 +32,7 @@ Camera::~Camera()
 Ray Camera::generateRay(float u, float v)
 {
     Vector3D rayDirection = direction_ + u * width_ * rightVector_ + v * height_ * upVector_;
-
+    //Vector3D rayDirection = Vector3D(u, v, -1);
     return Ray(position_, rayDirection.normalize());
 }
 

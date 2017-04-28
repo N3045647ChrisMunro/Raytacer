@@ -6,7 +6,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include <string>
+#include <string.h>
+#include <iostream>
 
 
 #define PORT 4850
@@ -48,8 +49,8 @@ void TCPNetwork::establishConnection(std::string hostname)
 	if (error) {
        std::cerr << "Couldnt get addrinfo: " << gai_strerror(error) << std::endl;
        /*NOTREACHED*/
-//	}
-/*
+/*    }
+
 	if(connect(sockfd_, res0->ai_addr, res0->ai_addrlen) < 0){
 		std::cerr << "Socket Connect Error" << std::endl;
     }
@@ -87,7 +88,6 @@ std::string TCPNetwork::receiveMessage()
 
 void TCPNetwork::cleanUp()
 {
-     #ifdef __linux__
      close(sockfd_);
 }
 */

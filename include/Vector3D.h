@@ -9,6 +9,7 @@
 #pragma once
 
 #include <iostream>
+#include <math.h>
 //class ostream;
 
 class Vector3D
@@ -67,6 +68,11 @@ inline Vector3D crossProduct(const Vector3D& A, const Vector3D& B)
         return Vector3D(A.y * B.z - A.z * B.y,
                         A.z * B.x - A.x * B.z,
                         A.x * B.y - A.y * B.x);
+}
+
+inline float distance(const Vector3D& A, const Vector3D& B)
+{
+    return sqrt( ((B.x - A.x) * (B.x - A.x)) + ((B.y - A.y) * (B.y - A.y)) + ((B.z - A.z) * (B.z - A.z)) );
 }
 
 

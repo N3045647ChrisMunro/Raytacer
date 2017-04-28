@@ -18,6 +18,8 @@
 #include "Plane.h"
 #include "Raytracer.h"
 
+#include "TCPNetwork.h"
+
 
 #include "tinyXML/tinyxml.h"
 
@@ -45,13 +47,13 @@ int main()
     Scene *scene = new Scene();
 
     Colour col4(0, 0, 0);
-    Sphere *sphere = new Sphere(Vector3D(20.0f, 10.0f, -50.f), 10.0f, col2);
-    Sphere *sphere2 = new Sphere(Vector3D(-30.0, 10.0, -50.0), 10.f, Colour(0, 0, 255));
+    Sphere *sphere = new Sphere(Vector3D(30.0f, 10.0f, -65.f), 10.0f, col2);
+    Sphere *sphere2 = new Sphere(Vector3D(-20.0, 15.0, -55.0), 15.f, Colour(0, 0, 255));
     Sphere *sphere3 = new Sphere(Vector3D(0.0, 20.0, -75.0), 20.f, Colour(156, 255, 78));
 
     Plane *groundPlane = new Plane(Vector3D(0.0f, 0.0f, 0.0f), Vector3D(0.0f, 1.0f, 0.f), Colour(114, 106, 67));
 
-    Vector3D lightPos(0.f, 20.f, 10.f);
+    Vector3D lightPos(100.f, 100.f, -50.f);
     Vector3D lightDir = lightPos - Vector3D(0.0, 0.0, 0.0);
     Light *light = new Light(lightPos, lightDir, Colour(255, 255, 255));
 
@@ -65,9 +67,15 @@ int main()
     //serializeScene(scene, "Scene.xml");
     //scene = loadSceneDataFromXml("Scene.xml");
 
+    //Test TCP
+    //TCPNetwork *network = new TCPNetwork();
+
+    //network->initSocket();
+    //network->establishConnection("127.0.0.1");
+
     Raytracer *rayTracer = new Raytracer();
 
-    rayTracer->renderScene(scene, image, "test1.bmp", 0, 0, image->getWidth(), image->getHeight());
+    rayTracer->renderScene(scene, image, "test1.bmp", 0, 0, width, height);
 
     return 0;
 }

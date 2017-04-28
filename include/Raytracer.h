@@ -16,6 +16,7 @@ class Raytracer
                          const int startIDX_Y, const int endIDX_X, const int endIDX_Y);
 
 
+
     private:
 
 };
