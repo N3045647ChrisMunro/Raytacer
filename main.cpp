@@ -47,23 +47,25 @@ int main()
     Scene *scene = new Scene();
 
     Colour col4(0, 0, 0);
-    Sphere *sphere = new Sphere(Vector3D(20.0f, 15.0f, -35.f), 5.0f, col2);
-    Sphere *sphere2 = new Sphere(Vector3D(-20.0, 15.0, -55.0), 15.f, Colour(0, 0, 255));
+    Sphere *sphere = new Sphere(Vector3D(20.0f, 20.0f, -35.f), 5.0f, col2);
+    Sphere *sphere2 = new Sphere(Vector3D(-20.0, 15.0, -55.0), 15.f, Colour(0, 255, 255));
     Sphere *sphere3 = new Sphere(Vector3D(0.0, 20.0, -75.0), 20.f, Colour(255, 0, 0));
 
     Plane *groundPlane = new Plane(Vector3D(0.0f, 0.0f, 0.0f), Vector3D(0.0f, 1.0f, 0.f), Colour(114, 106, 67));
 
-    Vector3D lightPos(35.f, 25.f, -25.f);
-    Light *light = new Light(lightPos, Colour(194, 150, 224));
-    Light *light1= new Light(Vector3D(0, 5, -25.f), Colour(194, 150, 224));
+    Vector3D lightPos(35.f, 25.f, -10.f);
+    Light *light = new Light(lightPos, Colour(194, 150, 224), 0.3f);
+    Light *light1= new Light(Vector3D(0, 5, -15.f), Colour(194, 150, 224), 0.3f);
+    Light *light2= new Light(Vector3D(-30, 35, -5.f), Colour(194, 150, 224), 0.85f);
 
     scene->setSceneCamera(mainCamera);
     scene->addObject(groundPlane);
-    //scene->addObject(sphere);
-    //scene->addObject(sphere2);
+    scene->addObject(sphere);
+    scene->addObject(sphere2);
     scene->addObject(sphere3);
-    //scene->addLight(light);
+    scene->addLight(light);
     scene->addLight(light1);
+    scene->addLight(light2);
 
     //serializeScene(scene, "Scene.xml");
     //scene = loadSceneDataFromXml("Scene.xml");
@@ -234,6 +236,11 @@ void serializeScene(Scene *scene, std::string filename)
             nodeData->SetAttribute("r", sceneLights[i]->getColour().r);
             nodeData->SetAttribute("g", sceneLights[i]->getColour().g);
             nodeData->SetAttribute("b", sceneLights[i]->getColour().b);
+            newLight->LinkEndChild(nodeData);
+
+            // Add Intensity
+            nodeData = new TiXmlElement("Intensity");
+            nodeData->SetDoubleAttribute("i", sceneLights[i]->getIntensity());
             newLight->LinkEndChild(nodeData);
 
         }
@@ -452,6 +459,7 @@ Scene* loadSceneDataFromXml(std::string filepath)
 
                             Vector3D pos;
                             Colour colour;
+                            float intensity;
 
                             nodeData = lightNode->FirstChildElement("Position");
 
@@ -479,7 +487,18 @@ Scene* loadSceneDataFromXml(std::string filepath)
 
                             }
 
-                            Light *tmp = new Light(pos, colour);
+                            nodeData = lightNode->FirstChildElement("Intensity");
+
+                            if(nodeData != nullptr){
+
+                                double i;
+                                nodeData->QueryDoubleAttribute("i", &i);
+
+                                intensity = (float)i;
+
+                            }
+
+                            Light *tmp = new Light(pos, colour, intensity);
 
                             lights.push_back(tmp);
                             std::cout << tmp->getPosition();

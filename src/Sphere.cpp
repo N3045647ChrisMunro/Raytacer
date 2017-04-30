@@ -48,15 +48,20 @@ bool Sphere::checkForIntersection(RayHitData &rayHitData)
         float t1 = (-B - sqrt(discriminant)) / (2 * A);
         float t2 = (-B + sqrt(discriminant)) / (2 * A);
 
-        if(t1 > ray.getMinDistance() && t1 < rayHitData.t)
+        if(t1 > ray.getMinDistance() && t1 < rayHitData.t){
+            rayHitData.intersectionPoint = ray.calculatePointOnRay(t1);
             rayHitData.t = t1;
-        else if(t2 > ray.getMinDistance() && t2 < rayHitData.t)
+        }
+        else if(t2 > ray.getMinDistance() && t2 < rayHitData.t){
             rayHitData.t = t2;
+            rayHitData.intersectionPoint = ray.calculatePointOnRay(t2);
+        }
         else
             return false;
 
         rayHitData.shape = this;
         rayHitData.colour = colour_;
+
 
         return true;
     }

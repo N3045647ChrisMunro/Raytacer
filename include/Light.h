@@ -15,16 +15,18 @@ class Light
 {
     public:
         Light();
-        Light(Vector3D position, Colour lightColour);
+        Light(Vector3D position, Colour lightColour, float intensity);
         ~Light();
 
         Vector3D getPosition() const { return position_; }
         Colour getColour() const { return colour_; }
+        float getIntensity() const { return intensity_; }
 
     private:
 
         Vector3D position_;
         Colour colour_;
+        float intensity_;
 
 };
 

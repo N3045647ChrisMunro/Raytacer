@@ -35,6 +35,7 @@ bool Plane::checkForIntersection(RayHitData &rayHitData)
     //Ray is within the relevant range, so return all the required data
     rayHitData.shape = this;
     rayHitData.colour = colour_;
+    rayHitData.intersectionPoint = ray.calculatePointOnRay(t);
     rayHitData.t = t;
 
     return true;

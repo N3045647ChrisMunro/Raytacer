@@ -29,7 +29,7 @@ bool Raytracer::renderScene(Scene *scene, Image *image, std::string filepath, co
     try{
         std::cout << "Rendering..." << std::endl;
 
-        //int antiAliasedSampling = 2;
+        int antiAliasedSampling = 2;
 
         int x = startIDX_X;
         int y = startIDX_Y;
@@ -44,11 +44,11 @@ bool Raytracer::renderScene(Scene *scene, Image *image, std::string filepath, co
         float aspectRatio = image->getWidth() / (float)image->getHeight();
         float angle = tan(3.14159 * 0.5 * fov / 180);
 
-        for(x = 0; x < endIDX_X; x++){
-            for(y = 0; y < endIDX_Y; y++){
+        for(y = startIDX_Y; y < endIDX_Y; y++){
+            for(x = startIDX_X; x < endIDX_X; x++){
 
-                const float u = (2.0f * x) / image->getWidth() - 1.0f;
-                const float v = (-2.0f * y) / image->getHeight() + 1.0f;
+                const float u = (2.0f * x + 0.5) / image->getWidth() - 1.0f;
+                const float v = (-2.0f * y + 0.5) / image->getHeight() + 1.0f;
 
                 Ray ray;
                 Camera *mainCamera = scene->getCamera();
@@ -77,7 +77,7 @@ bool Raytracer::renderScene(Scene *scene, Image *image, std::string filepath, co
 
                         if(objects[i]->checkForIntersection(rayHitData)){
 
-                            intersectionPoint = ray.calculatePointOnRay(rayHitData.t);
+                            intersectionPoint = rayHitData.intersectionPoint;
                             intersectNormal = objects[i]->getNormalAtPoint(intersectionPoint);
 
                             float dist = distance(mainCamera->getPosition(), intersectionPoint);
@@ -96,7 +96,7 @@ bool Raytracer::renderScene(Scene *scene, Image *image, std::string filepath, co
                                         lightDirection = lights[k]->getPosition() - intersectionPoint;
                                         Vector3D shadowRayDirection = intersectionPoint - lights[k]->getPosition();
 
-                                        Ray shadowRay(intersectionPoint * 0.0001, shadowRayDirection);
+                                        Ray shadowRay(intersectionPoint * 0.0001, lightDirection);
                                         RayHitData shadowRayHitData;
                                         shadowRayHitData.ray = shadowRay;
 
@@ -105,27 +105,25 @@ bool Raytracer::renderScene(Scene *scene, Image *image, std::string filepath, co
                                             if(objects[j]->checkForIntersection(shadowRayHitData)){
                                                 //isShadow = true;
                                             }
+                                            else{
+                                                isShadow = false;
+                                            }
                                             break;
                                         }
 
                                         if(!isShadow){
-                                            col += (lights[k]->getColour() * dotProduct(intersectNormal.normalize(), lightDirection.normalize()) * (tmpShape->getColour()*1.0f));
-                                            //col = col / 255;
-                                            //std::cout << col;
-
+                                            col += ((lights[k]->getColour() * lights[k]->getIntensity() ) * dotProduct(intersectNormal.normalize(), lightDirection.normalize()) * (tmpShape->getColour()*1.0f));
                                         }
                                         else{
-                                            col += (lights[k]->getColour() * dotProduct(intersectNormal.normalize(), lightDirection.normalize()) * (tmpShape->getColour()*0.1f));
-                                            col = col / 255;
+                                            col += (lights[k]->getColour() * dotProduct(intersectNormal.normalize(), lightDirection.normalize()) * (tmpShape->getColour()*0.5f));
                                         }
                                     }
-                                    col = col / 255;
-                                    col.clamp();
-                                    image->set(x, y, col);
-
 
                                 }
                             }
+                            col = col / 255;
+                            col.clamp();
+                            image->set(x, y, col);
 
                         }
                     }
